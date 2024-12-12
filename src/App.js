@@ -1,11 +1,68 @@
-import React from 'react';
-import { Box, Button, Container, Typography, Grid, Card, CardContent } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Box, Button, Container, Typography, Grid, Card, CardContent, CircularProgress } from '@mui/material';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 import DownloadIcon from '@mui/icons-material/Download';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
+import { db, storage } from './firebase';
+import { collection, getDocs } from "firebase/firestore";
+import { getDownloadURL, ref } from "firebase/storage";
 
 function App() {
+  const [downloadUrl, setDownloadUrl] = useState(null);
+  const [appLogo, setAppLogo] = useState(null);
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    // Fetch "notification" collection and get a single document's download URL
+    const fetchNotification = async () => {
+      try {
+        // Get all documents from the 'notification' collection
+        const querySnapshot = await getDocs(collection(db, "notification"));
+        
+        if (!querySnapshot.empty) {
+          // Get the first document in the collection
+          const firstDoc = querySnapshot.docs[0]; 
+          console.log("data: ", firstDoc.data())
+          // Assuming the document has a field called 'filePath' or 'fileName' that refers to the storage file path
+          const downloadUrl = firstDoc.data().downloadUrl??''; 
+          setDownloadUrl(downloadUrl|| '');
+          const appLogoUrl = firstDoc.data().appLogoUrl??''; 
+          setAppLogo(appLogoUrl || '')
+        } else {
+          console.error('No documents found in "notification" collection.');
+        }
+      } catch (error) {
+        console.error('Error fetching document or download URL:', error);
+      }finally {
+        setLoading(false); // Set loading to false after data is fetched
+      }
+    };
+
+    fetchNotification();
+  }, []);
+
+  if (loading) {
+    return (
+      <Container
+        maxWidth="md"
+        sx={{
+          py: 4,
+          textAlign: 'center',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}
+      >
+        <CircularProgress />
+        <Typography variant="body1" sx={{ mt: 2 }}>
+          Loading data...
+        </Typography>
+      </Container>
+    );
+  }
+
   return (
     <Container 
       maxWidth="md" 
@@ -21,7 +78,7 @@ function App() {
       {/* Logo Section */}
       <Box 
         component="img" 
-        src="https://firebasestorage.googleapis.com/v0/b/royale-play-casino.firebasestorage.app/o/Logo.png?alt=media&token=0e8900e2-6b5f-46a3-b3e7-05a9b5079476" 
+        src={appLogo || ''} 
         alt="App Logo" 
         sx={{ 
           width: '150px', 
@@ -49,15 +106,27 @@ function App() {
       </Typography>
 
       {/* Download Button */}
+      {downloadUrl ? (
       <Button 
         variant="contained" 
         color="primary" 
         size="large" 
         startIcon={<DownloadIcon />} 
         sx={{ mb: 4 }}
+         href={downloadUrl || ''} 
+          target="_blank"
       >
         Download The App
       </Button>
+    ) : (
+        <Typography 
+          variant="body2" 
+          color="text.secondary" 
+          sx={{ mb: 4 }}
+        >
+          Loading download link...
+        </Typography>
+      )}
 
       {/* Customer Support Section */}
       <Typography 
