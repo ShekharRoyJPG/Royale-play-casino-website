@@ -4,9 +4,9 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 import DownloadIcon from '@mui/icons-material/Download';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
-import { db, storage } from './firebase';
+import { db } from './firebase';
 import { collection, getDocs } from "firebase/firestore";
-import { getDownloadURL, ref } from "firebase/storage";
+
 
 function App() {
   const [downloadUrl, setDownloadUrl] = useState(null);
