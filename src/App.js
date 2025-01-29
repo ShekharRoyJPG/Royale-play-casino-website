@@ -81,8 +81,8 @@ function App() {
         src={appLogo || ''} 
         alt="App Logo" 
         sx={{ 
-          width: '150px', 
-          height: '150px', 
+          width: '192px', 
+          height: '192px', 
           mb: 3 
         }} 
       />
@@ -96,13 +96,14 @@ function App() {
           mb: 2 
         }}
       >
-        Welcome to Our App
+        RPCFF - Royale Play Casino welcomes you to our platform, Royal Fatafats.
       </Typography>
       <Typography 
         variant="body1" 
         sx={{ mb: 4, color: 'text.secondary' }}
       >
-        Experience the ultimate convenience at your fingertips. Get started now and explore the features that make us stand out!
+        Download our Royale Play Casino and play games like Kolkata Fatafat, Loto, Super Bengal Fatafat, and Main Bazar.  
+        Enjoy our games with super-fast UPI payments and a 100% payout guarantee!
       </Typography>
 
       {/* Download Button */}
@@ -174,6 +175,18 @@ function App() {
           </Grid>
         </CardContent>
       </Card>
+
+      {/* Footer Section */}
+      <Typography 
+        variant="body2" 
+        color="text.secondary" 
+        sx={{ mt: 6, textAlign: 'center' }}
+      >
+        &copy; 2025 Royale Play Casino. All rights reserved.
+      </Typography>
+
+
+
     </Container>
   );
 }
