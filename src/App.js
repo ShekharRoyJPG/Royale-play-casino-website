@@ -96,13 +96,13 @@ function App() {
           mb: 2 
         }}
       >
-        RPCFF - Royale Play Casino welcomes you to our platform, Royal Fatafats.
+        RPCFF - Royale Play Casino<br/>Welcomes you to our platform, Royal Fatafats.
       </Typography>
       <Typography 
         variant="body1" 
         sx={{ mb: 4, color: 'text.secondary' }}
       >
-        Download our Royale Play Casino and play games like Kolkata Fatafat, Loto, Super Bengal Fatafat, and Main Bazar.  
+        Download our Royale Play Casino and play games like Kolkata Fatafat, Loto, Super Bengal Fatafat, and Main Bazar.<br/> 
         Enjoy our games with super-fast UPI payments and a 100% payout guarantee!
       </Typography>
 
@@ -117,7 +117,7 @@ function App() {
          href={downloadUrl || ''} 
           target="_blank"
       >
-        Download The App
+        Download Android App
       </Button>
     ) : (
         <Typography 
@@ -157,12 +157,16 @@ function App() {
               <SupportAgentIcon fontSize="large" color="primary" />
               <Typography variant="h6" sx={{ mt: 1, fontWeight: 'bold' }}>Call Us</Typography>
               <Typography variant="body2" color="text.secondary">+919883638435</Typography>
+              <Typography variant="body2" color="text.secondary">+919800668700</Typography>
+              <Typography variant="body2" color="text.secondary">+919883638435</Typography>
             </Grid>
 
             {/* Mobile Support Section */}
             <Grid item xs={12} sm={4} textAlign="center">
               <PhoneIcon fontSize="large" color="primary" />
               <Typography variant="h6" sx={{ mt: 1, fontWeight: 'bold' }}>Mobile Support</Typography>
+              <Typography variant="body2" color="text.secondary">+919883638435</Typography>
+              <Typography variant="body2" color="text.secondary">+919800668700</Typography>
               <Typography variant="body2" color="text.secondary">+919883638435</Typography>
             </Grid>
 
